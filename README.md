@@ -1,4 +1,6 @@
+[![npm version](https://badge.fury.io/js/%40servicetitan%2Ftslint-yield.svg)](https://badge.fury.io/js/%40servicetitan%2Ftslint-yield)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/servicetitan/tslint-yield.svg?branch=master)](https://travis-ci.org/servicetitan/tslint-yield)
 
 Yield Rule
 ======
