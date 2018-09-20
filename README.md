@@ -1,6 +1,7 @@
 [![npm version](https://badge.fury.io/js/%40servicetitan%2Ftslint-yield.svg)](https://badge.fury.io/js/%40servicetitan%2Ftslint-yield)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/servicetitan/tslint-yield.svg?branch=master)](https://travis-ci.org/servicetitan/tslint-yield)
+[![Coverage Status](https://coveralls.io/repos/github/servicetitan/tslint-yield/badge.svg?branch=master)](https://coveralls.io/github/servicetitan/tslint-yield?branch=master)
 
 Yield Rule
 ======
