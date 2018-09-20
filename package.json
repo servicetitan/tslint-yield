@@ -1,7 +1,7 @@
 {
-  "name": "tslint-yield",
+  "name": "@servicetitan/tslint-yield",
   "version": "1.0.0",
-  "description": "Yield TSLint rule that strict return type",
+  "description": "TSLint rule that requires a strict return type for Yield Expressions when result is used.",
   "main": "tslint-base.json",
   "scripts": {
     "build": "tsc --p tsconfig.json",
@@ -19,12 +19,11 @@
     "typescript"
   ],
   "author": "ServiceTitan",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/servicetitan/tslint-yield/issues"
   },
   "homepage": "https://github.com/servicetitan/tslint-yield#readme",
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "21.1.10",
     "tslint": "^5.11.0",
@@ -36,5 +35,11 @@
   "peerDependencies": {
     "tslint": "^5.11.0",
     "typescript": "^3.0.3"
-  }
+  },
+  "files": [
+    "/dist",
+    "/rules",
+    "tsconfig.json",
+    "tslint-base.json"
+  ]
 }
