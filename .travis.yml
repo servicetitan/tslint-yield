@@ -1,0 +1,27 @@
+language: node_js
+node_js:
+    - 'stable'
+before_install:
+    - npm install -g typescript
+install:
+    - npm install
+script:
+    - npm run test
+    - npm run build
+deploy:
+    provider: npm
+    skip_cleanup: true
+    email: $NPM_EMAIL
+    api_key: $NPM_TOKEN
+    on:
+        tags: true
+cache:
+  directories:
+    - node_modules
+notifications:
+  email:
+    recipients:
+    - spopov@servicetitan.com
+    - kanoshin@servicetitan.com
+    on_success: change
+    on_failure: always
