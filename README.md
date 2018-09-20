@@ -28,7 +28,7 @@ To lint your `.ts` **and** `.tsx` files you can simply run `tslint -c tslint.jso
 
 requires a strict return type for Yield Expressions when result is used in cases:
  
-#####Property Access Expressions
+####Property Access Expressions
 ```ts
 //Fail
 (yield getData()).result;
@@ -36,7 +36,7 @@ requires a strict return type for Yield Expressions when result is used in cases
 //Good
 ((yield getData()) as ResultType).result;
 ```
-#####Variable Statement
+####Variable Statement
 ```ts
 //Fail
 var result = yield getData();
@@ -44,7 +44,7 @@ var result = yield getData();
 //Good
 var result = (yield getData()) as ResultType;
 ```
-#####Binary Expression
+####Binary Expression
 ```ts
 //Fail
 var result = null;
@@ -63,7 +63,7 @@ result.data = yield getData();
 var result = { data: null };
 result.data = (yield getData()) as ResultData;
 ```
-#####Any is not allowed
+####Any is not allowed
 ```ts
 //Fail
 (yield getData()) as any).result
