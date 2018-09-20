@@ -1,0 +1,40 @@
+{
+  "name": "tslint-yield",
+  "version": "1.0.0",
+  "description": "Yield TSLint rule that strict return type",
+  "main": "tslint-base.json",
+  "scripts": {
+    "build": "tsc --p tsconfig.json",
+    "clean": "rimraf dist",
+    "build:clean": "npm run clean && npm run build",
+    "test": "jest --config jest.config.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/servicetitan/tslint-yield.git"
+  },
+  "keywords": [
+    "ServiceTitan",
+    "tslint",
+    "typescript"
+  ],
+  "author": "ServiceTitan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/servicetitan/tslint-yield/issues"
+  },
+  "homepage": "https://github.com/servicetitan/tslint-yield#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "21.1.10",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3",
+    "rimraf": "^2.6.1",
+    "jest": "22.4.4",
+    "ts-jest": "21.2.4"
+  },
+  "peerDependencies": {
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
+  }
+}
