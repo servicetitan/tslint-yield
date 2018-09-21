@@ -18,7 +18,7 @@ Here's a sample configuration where `tslint.json` lives adjacent to your `node_m
 
 ```js
 {
-  "extends": ["tslint-yield"],
+  "extends": ["@servicetitan/tslint-yield"],
   "rules": {
     // turn on tslint-yield rule here
     "yield": true
