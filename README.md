@@ -8,6 +8,7 @@ Yield Rule
 
 Lint rule that requires a strict return type for Yield Expressions when result is used for [TSLint](https://github.com/palantir/tslint/).
 
+
 ### Usage
 
 tslint-yield has peer dependencies on TSLint and TypeScript.
