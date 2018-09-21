@@ -20,7 +20,7 @@ Here's a sample configuration where `tslint.json` lives adjacent to your `node_m
 {
   "extends": ["tslint-yield"],
   "rules": {
-    // turn on tslint-yield rules here
+    // turn on tslint-yield rule here
     "yield": true
   }
 }
