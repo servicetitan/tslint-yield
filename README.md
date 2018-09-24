@@ -56,7 +56,7 @@ result = yield getData();
 
 //Good
 var result = null;
-result = (yield getData()) as ResultData;
+result = (yield getData()) as ResultType;
 ```
 ```ts
 //Fail
@@ -65,7 +65,7 @@ result.data = yield getData();
 
 //Good
 var result = { data: null };
-result.data = (yield getData()) as ResultData;
+result.data = (yield getData()) as ResultType;
 ```
 ##### Any is not allowed
 ```ts
@@ -73,5 +73,5 @@ result.data = (yield getData()) as ResultData;
 (yield getData()) as any).result
 
 //Good
-((yield getData()) as ResultData).result;
+((yield getData()) as ResultType).result;
 ```
