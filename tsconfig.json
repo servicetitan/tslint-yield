@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "lib": ["dom", "es2017"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitHelpers": true,
+    "noImplicitAny": false,
+    "outDir": "dist",
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5"
+  },
+  "include": [
+    "rules/*Rule.ts"
+  ]
+}
