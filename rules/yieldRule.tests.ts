@@ -149,5 +149,14 @@ describe('yield Rule', () => {
             const result = helper({src, rule});
             expect(result.errorCount).toBe(0);
         });
+
+        it(`should fail when having wrong yield type`, () => {
+            const src = baseCode + `
+            function* Test() {
+                result.data = (yield number) as number;
+            }`;
+            const result = helper({src, rule});
+            expect(result.errorCount).toBe(1);
+        });
     });
 });

@@ -22,7 +22,7 @@ class StrictYieldTypeWalker extends Lint.AbstractWalker<Set<string>> {
 
     constructor(checker: ts.TypeChecker, sourceFile: ts.SourceFile, ruleName: string, options: Set<string>) {
         super(sourceFile, ruleName, options);
-
+        
         this.checker = checker;
     }
 
@@ -74,13 +74,12 @@ class StrictYieldTypeWalker extends Lint.AbstractWalker<Set<string>> {
         if(result) {
             const castType = this.checker.getTypeAtLocation(children[2]);
             let yieldType = yieldExpression.getChildCount() > 0 && this.checker.getTypeAtLocation(yieldExpression.getChildAt(1));
+            let yieldPromiseType = this.checker['getPromisedTypeOfPromise'](yieldType);
 
-            yieldType = this.checker['getPromisedTypeOfPromise'](yieldType) || yieldType;
-
-            if(yieldType !== castType) {
-                const error = "yield return type '" + this.checker.typeToString(yieldType) + "' is not equal to " +
-                    "casting type '" + this.checker.typeToString(castType) + "'";
-
+            if(yieldPromiseType !== castType) {
+                const error = !!yieldPromiseType ? "yield return type '" + this.checker.typeToString(yieldPromiseType) + "' is not equal to " +
+                    "casting type '" + this.checker.typeToString(castType) + "'" : "Yield expression does't return Promise type: " + yieldExpression.getText();
+                
                 this.addFailureAtNode(node, error);
             }
         }

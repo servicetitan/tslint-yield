@@ -85,3 +85,13 @@ const getData = () => new Promise<number>(() => {});
 //Good
 ((yield getData()) as number).result;
 ```
+##### Yield Type should be Promise
+```ts
+const getData = () => new Promise<number>(() => {});
+
+//Fail
+let result = (yield number) as number)
+
+//Good
+let result = ((yield getData()) as number);
+```
