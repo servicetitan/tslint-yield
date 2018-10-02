@@ -64,11 +64,14 @@ var StrictYieldTypeWalker = (function (_super) {
             var castType = this.checker.getTypeAtLocation(children[2]);
             var yieldType = yieldExpression.getChildCount() > 0 && this.checker.getTypeAtLocation(yieldExpression.getChildAt(1));
             yieldType = this.checker['getPromisedTypeOfPromise'](yieldType) || yieldType;
-            this.addFailureAtNode(node, "yield type: " + this.checker.typeToString(yieldType) + ', ' +
-                "cast type: " + this.checker.typeToString(castType) + ', ' +
-                "Is equal: " + (yieldType == castType));
+            if (yieldType !== castType) {
+                var error = "yield return type '" + this.checker.typeToString(yieldType) + "' is not equal to " +
+                    "casting type '" + this.checker.typeToString(castType) + "'";
+                this.addFailureAtNode(node, error);
+                console.error(error);
+            }
         }
-        return true;
+        return result;
     };
     return StrictYieldTypeWalker;
 }(Lint.AbstractWalker));
