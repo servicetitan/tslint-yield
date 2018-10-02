@@ -75,3 +75,13 @@ result.data = (yield getData()) as ResultType;
 //Good
 ((yield getData()) as ResultType).result;
 ```
+##### Yield Type and casting type should be equal
+```ts
+const getData = () => new Promise<number>(() => {});
+
+//Fail - string !== number
+(yield getData()) as string).result
+
+//Good
+((yield getData()) as number).result;
+```
