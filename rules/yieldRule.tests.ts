@@ -130,4 +130,24 @@ describe('yield Rule', () => {
              expect(result.errorCount).toBe(0);
          });
      });
+
+    describe('Type Checking', () => {
+        it(`should fail when having different types`, () => {
+            const src = baseCode + `
+            function* Test() {
+                result.data = (yield getData()) as number;
+            }`;
+            const result = helper({src, rule});
+            expect(result.errorCount).toBe(1);
+        });
+
+        it(`shouldn't fail when having the same types`, () => {
+            const src = baseCode + `
+            function* Test() {
+                result.data = (yield getData()) as ResultData;
+            }`;
+            const result = helper({src, rule});
+            expect(result.errorCount).toBe(0);
+        });
+    });
 });

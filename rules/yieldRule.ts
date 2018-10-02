@@ -82,7 +82,6 @@ class StrictYieldTypeWalker extends Lint.AbstractWalker<Set<string>> {
                     "casting type '" + this.checker.typeToString(castType) + "'";
 
                 this.addFailureAtNode(node, error);
-                console.error(error);
             }
         }
 
