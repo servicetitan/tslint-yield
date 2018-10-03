@@ -1,6 +1,6 @@
 {
   "name": "@servicetitan/tslint-yield",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TSLint rule that requires a strict return type for Yield Expressions when result is used.",
   "main": "tslint-base.json",
   "publishConfig": {
