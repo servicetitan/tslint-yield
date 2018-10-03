@@ -7,8 +7,9 @@ var Rule = (function (_super) {
     function Rule() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Rule.prototype.apply = function (sourceFile) {
-        return this.applyWithWalker(new StrictYieldTypeWalker(sourceFile, this.ruleName, new Set(this.ruleArguments.map(String))));
+    Rule.prototype.applyWithProgram = function (sourceFile, program) {
+        var checker = program.getTypeChecker();
+        return this.applyWithWalker(new StrictYieldTypeWalker(checker, sourceFile, this.ruleName, new Set(this.ruleArguments.map(String))));
     };
     Rule.FAILURE_STRING = "yield result should be typed if result is used: (__EXPRESSION__) as 'ResultType'";
     Rule.PARENT_TYPES_SHOULD_ANALYSED = [
@@ -17,12 +18,14 @@ var Rule = (function (_super) {
         ts.SyntaxKind.BinaryExpression
     ];
     return Rule;
-}(Lint.Rules.AbstractRule));
+}(Lint.Rules.TypedRule));
 exports.Rule = Rule;
 var StrictYieldTypeWalker = (function (_super) {
     __extends(StrictYieldTypeWalker, _super);
-    function StrictYieldTypeWalker() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function StrictYieldTypeWalker(checker, sourceFile, ruleName, options) {
+        var _this = _super.call(this, sourceFile, ruleName, options) || this;
+        _this.checker = checker;
+        return _this;
     }
     StrictYieldTypeWalker.prototype.walk = function (sourceFile) {
         var _this = this;
@@ -38,7 +41,7 @@ var StrictYieldTypeWalker = (function (_super) {
     };
     StrictYieldTypeWalker.prototype.checkYieldExpression = function (node) {
         var isParentNodeExist = node.parent && node.parent.parent;
-        if (isParentNodeExist && this.checkParentType(node) && !StrictYieldTypeWalker.validateAsExpression(node.parent.parent)) {
+        if (isParentNodeExist && this.checkParentType(node) && !this.validateAsExpression(node.parent.parent, node)) {
             this.addFailureAtNode(node, Rule.FAILURE_STRING.replace('__EXPRESSION__', node.getText()));
         }
     };
@@ -51,12 +54,24 @@ var StrictYieldTypeWalker = (function (_super) {
         }
         return this.checkParentType(node.parent);
     };
-    StrictYieldTypeWalker.validateAsExpression = function (node) {
+    StrictYieldTypeWalker.prototype.validateAsExpression = function (node, yieldExpression) {
         var children = node.getChildren();
-        return children.length === 3 &&
+        var result = children.length === 3 &&
             children[0].kind === ts.SyntaxKind.ParenthesizedExpression &&
             children[1].kind === ts.SyntaxKind.AsKeyword &&
             children[2].kind !== ts.SyntaxKind.AnyKeyword;
+        if (result) {
+            var castType = this.checker.getTypeAtLocation(children[2]);
+            var yieldType = yieldExpression.getChildCount() > 0 && this.checker.getTypeAtLocation(yieldExpression.getChildAt(1));
+            yieldType = this.checker['getPromisedTypeOfPromise'](yieldType) || yieldType;
+            if (yieldType !== castType) {
+                var error = "yield return type '" + this.checker.typeToString(yieldType) + "' is not equal to " +
+                    "casting type '" + this.checker.typeToString(castType) + "'";
+                this.addFailureAtNode(node, error);
+                console.error(error);
+            }
+        }
+        return result;
     };
     return StrictYieldTypeWalker;
 }(Lint.AbstractWalker));
